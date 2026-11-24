@@ -10,16 +10,17 @@
 
 ## Team & Presentation
 
-- **Team Name:** `[Enter Team Name — e.g., Team Sentinel]`
-- **Team ID:** `[Enter Team ID]`[cite: 2]
+- **Team Name:** `The Panic Pushers`
+- **Team ID:** `843f4120`[cite: 2]
 - **College / Event:** Ramaiah Institute of Technology — wHACKiest 2026[cite: 2, 5]
-- **Presentation (PPT) Link:** `[Paste your Google Slides / GitHub / Drive PPT link here]`[cite: 5]
+- **Presentation (PPT) Link:** `
+https://docs.google.com/presentation/d/1Fml_sfwIPUtkwxDXzWESM3TOigBAsqc9/edit?usp=drivesdk&ouid=100004759257099192431&rtpof=true&sd=true`[cite: 5]
 
 ### Team Members
-- **Member 1 (Lead):** `[Full Name]` — USN: `[USN]`[cite: 2]
-- **Member 2:** `[Full Name]` — USN: `[USN]`[cite: 2]
-- **Member 3:** `[Full Name]` — USN: `[USN]`[cite: 2]
-- **Member 4:** `[Full Name]` — USN: `[USN]`[cite: 2]
+- **Member 1 (Lead):** `Harshitha N` — USN: `1MS25CS063`[cite: 2]
+- **Member 2:** `Anagha Pai` — USN: `1MS25CS012`[cite: 2]
+- **Member 3:** `Ananya AU` — USN: `1MS25CS017`[cite: 2]
+
 
 ---
 
