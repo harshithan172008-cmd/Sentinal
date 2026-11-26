@@ -93,7 +93,9 @@ class Gateway:
         masked_subj, subj_map = redact(doc.get("subject", ""))
         self.mappings[doc["id"]] = {"body": body_map, "subject": subj_map}
         wrapped = wrap_untrusted(masked_body)
-        self.views.append({"id": doc["id"], "original": raw, "masked": wrapped, "flags": flags})
+        self.views.append({"id": doc["id"], "original": raw, "masked": wrapped, "flags": flags,
+                           "sender": doc.get("sender", ""), "subject": doc.get("subject", ""),
+                           "date": doc.get("date", ""), "source": doc.get("source", "gmail")})
         return {
             "id": doc["id"],
             "sender": doc.get("sender", ""),
@@ -112,7 +114,8 @@ class Gateway:
         params = StdioServerParameters(
             command=sys.executable,
             args=[str(path)],
-            env={"FAKE_MODE": os.getenv("FAKE_MODE", "1")},
+                        env={k: os.environ[k] for k in ("BILLS_DIR", "TZ_NAME", "TZ_OFFSET_MINUTES") if k in os.environ}
+            | {"FAKE_MODE": os.getenv("FAKE_MODE", "1")},
         )
         async with stdio_client(params) as (read, write):
             async with ClientSession(read, write) as session:
