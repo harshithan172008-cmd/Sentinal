@@ -1,0 +1,10 @@
+default: block
+tools:
+  gmail.search_billing_emails: allow
+  pdf.list_bills: allow
+  pdf.read_bill: allow
+  calendar.list_events: allow
+  gmail.create_draft: ask
+  gmail.delete_draft: ask
+  calendar.create_event: ask
+  calendar.delete_event: ask
