@@ -1,0 +1,5 @@
+[
+  {"id": "s1", "sender": "billing@netflix.com", "subject": "Your Netflix receipt", "date": "2026-10-01", "body_text": "Thanks for your payment of Rs. 499 for your Netflix plan. Next billing date: 1 Nov 2026.", "source": "gmail"},
+  {"id": "s2", "sender": "billing@netflix.com", "subject": "Upcoming price change", "date": "2026-11-10", "body_text": "From 1 Dec 2026 your Netflix plan will cost Rs. 649 per month.", "source": "gmail"},
+  {"id": "s3", "sender": "no-reply@spotify.com", "subject": "Your free trial ends soon", "date": "2026-11-24", "body_text": "Your Spotify Premium free trial ends on 29 Nov 2026. After that you will be charged Rs. 119 per month.", "source": "gmail"}
+]

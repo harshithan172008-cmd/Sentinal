@@ -1,0 +1,17 @@
+mcp
+google-api-python-client
+google-auth-oauthlib
+presidio-analyzer
+presidio-anonymizer
+spacy
+pdfplumber
+pytesseract
+pydantic
+pyyaml
+streamlit
+plotly
+pandas
+cryptography
+ollama
+apscheduler
+pytest
