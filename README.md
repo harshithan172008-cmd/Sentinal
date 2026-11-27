@@ -112,6 +112,19 @@ python -m spacy download en_core_web_sm
 ollama pull qwen2.5:3b
 ```[cite: 1]
 
+### Run the integrated custom frontend (safe local demo)
+
+The `sentinel-frontend/` page can use the existing Python scan, subscription, approval, timeline, privacy, and audit modules through `run_frontend.py`. From the repository folder, install the listed dependencies and start the local bridge:
+
+```powershell
+py -m pip install -r requirements.txt
+py run_frontend.py
+```
+
+Open `http://127.0.0.1:8000`. The bridge binds to loopback only, forces `FAKE_MODE=1` and `USE_LLM=0`, and uses bundled sample messages. It does not connect to Gmail, Calendar, or an external model. Approvals exercise the existing backend in fake mode; they do not create real drafts or calendar events. The top-bar sign-in is a demo-only continuation and does not authenticate with Google; the repository OAuth helper is not wired into this frontend bridge. The frontend uses a separate temporary database and encryption key—not the Streamlit app’s data—and removes them when the process exits. Press `Ctrl+C` in PowerShell to stop it.
+
+The original Streamlit interface is still available separately with `py -m streamlit run app.py`. Do not run both on the same port; Streamlit uses its own default port.
+
 ### Free-Cost & OAuth Checklist
 - **Never attach a billing account** to Google Cloud or AI Studio[cite: 1].
 - **Use local Ollama by default** to avoid cloud rate limits during demos[cite: 1].

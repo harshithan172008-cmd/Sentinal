@@ -95,6 +95,7 @@ class Gateway:
         wrapped = wrap_untrusted(masked_body)
         self.views.append({"id": doc["id"], "original": raw, "masked": wrapped, "flags": flags,
                            "sender": doc.get("sender", ""), "subject": doc.get("subject", ""),
+                           "masked_subject": masked_subj,
                            "date": doc.get("date", ""), "source": doc.get("source", "gmail")})
         return {
             "id": doc["id"],
