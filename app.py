@@ -117,6 +117,11 @@ div[role="radiogroup"] label:has(input:checked) p{color:var(--bg)!important}
 .pill i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);margin-right:8px}
 .av{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--pan);color:var(--bg);font:800 .8rem 'Bricolage Grotesque',sans-serif;margin-left:12px}
 .banner{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--al);border-radius:12px;padding:12px 16px;font-size:.92rem;margin-bottom:16px;animation:rise .6s both}
+.mkw{background:var(--card);border:1.5px solid var(--ink);border-radius:16px;padding:14px 18px;margin-top:12px}
+.mkw>b{display:block;margin-bottom:6px}
+.mk{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:8px 0;border-top:1px solid var(--line)}
+.mk code{font:500 .84rem 'IBM Plex Mono',monospace;background:transparent;color:var(--ink)}
+.tg{background:var(--al);color:#12392E;border-radius:5px;padding:1px 8px;font:500 .8rem 'IBM Plex Mono',monospace}
 @media(max-width:700px){.trust{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -274,13 +279,8 @@ def goto(p):
 
 
 def nav_label(p):
-    if p == PAGES[2]:
-        n = len({v["id"] for v in gw.views})
-    elif p == PAGES[3]:
-        n = len(approvals.list_all("pending"))
-    else:
-        n = 0
-    return f"{p}   ·   {n}" if n else p
+    # Keep labels constant: changing them would make Streamlit reset the selected page after every approve.
+    return p
 
 
 def chips(flags):
@@ -648,6 +648,34 @@ def page_timeline():
                  hide_index=True)
 
 
+def masked_items(original, masked):
+    """Pairs each placeholder in the masked text with the original value it replaced."""
+    pat = r"\[[A-Z_]+_\d+\]"
+    toks = re.findall(pat, masked or "")
+    if not toks:
+        return []
+    vals = [None] * len(toks)
+    if len(original or "") < 20000:
+        parts = re.split(pat, masked)
+        m = re.fullmatch("(.+?)".join(re.escape(x) for x in parts), original or "", re.S)
+        if m:
+            vals = list(m.groups())
+    return list(zip(toks, vals))
+
+
+def show_masked(original, masked):
+    items = masked_items(original, masked)
+    if not items:
+        st.caption("Nothing was masked in this email.")
+        return
+    rows = "".join(
+        f"<div class='mk'><span class='chip'>{html.escape(t.strip('[]').rsplit('_', 1)[0].replace('_', ' ').title())}</span>"
+        f"<code>{html.escape(v.strip()[:80]) if v else 'hidden'}</code> → <span class='tg'>{html.escape(t)}</span></div>"
+        for t, v in items)
+    st.markdown(f"<div class='mkw'><b>What ControlHub hid from the AI ({len(items)})</b>{rows}</div>",
+                unsafe_allow_html=True)
+
+
 def page_ai_saw():
     st.subheader("Exactly what the AI received")
     st.caption("Left: what Gmail returned. Right: what ControlHub sent to the AI after cleaning and masking. "
@@ -663,6 +691,7 @@ def page_ai_saw():
             t1, t2 = st.tabs(["Slide to compare", "Side by side"])
             with t1:
                 compare_view(v["original"], v["masked"])
+                show_masked(v["original"], v["masked"])
             with t2:
                 left, right = st.columns(2)
                 left.caption("Original")
