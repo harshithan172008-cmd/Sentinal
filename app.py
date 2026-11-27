@@ -94,7 +94,10 @@ div[role="radiogroup"] label:has(input:checked) p{color:var(--bg)!important}
 .tc:hover{transform:translateY(-6px) rotate(-.8deg);box-shadow:6px 8px 0 var(--al)}
 .tc span{display:block;font-size:1.7rem;margin-bottom:4px}
 .lp{text-align:center;font-size:1.12rem;color:var(--mut)}
-[data-testid="stToolbar"]{display:none}
+[data-testid="stMainMenu"],[data-testid="stAppDeployButton"],[data-testid="stToolbarActions"]{display:none}
+[data-testid="stExpandSidebarButton"],[data-testid="stSidebarCollapsedControl"]{display:flex!important;visibility:visible!important;opacity:1!important}
+[data-testid="stExpandSidebarButton"]{background:var(--al)!important;border-radius:10px!important}
+.stApp [data-testid="stExpandSidebarButton"] *{color:#12392E!important;fill:#12392E!important}
 [data-testid="stSidebarCollapseButton"]{opacity:1!important;visibility:visible!important}
 [data-testid="stSidebarCollapseButton"] button,[data-testid="stSidebarCollapsedControl"] button{background:var(--al)!important;border-radius:10px!important}
 [data-testid="stSidebarCollapseButton"] svg,[data-testid="stSidebarCollapsedControl"] svg{color:#12392E!important;fill:#12392E!important}
